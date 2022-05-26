@@ -1,0 +1,49 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Posts</h1>
+
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <form class="form-inline">
+    Author
+    <input class="form-control mr-sm-2" type="search" placeholder="Author" aria-label="Author" name="author">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+
+<% if @posts.count > 0 %>
+
+<div id="posts">
+  <h1>Resultados para el author: <%=params[:author]%></h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Author</th>
+        <th>Ver datos</th>
+      </tr>
+    </thead>
+  
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.content %></td>
+      <td><%= post.author %></td>
+      <td><%= link_to "Ver post", post %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
+
+<br><br>
+<%= paginate(@posts) %>
+<br><br>
+
+<% else %>
+
+<h1>No hay resultados para el author: <%=params[:author]%></h1>
+
+<% end %>
+
+<%= link_to "New post", new_post_path %>
+
